@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		59AFD4021FFD562B004B431B /* RNScratchImageViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 59AFD4011FFD562B004B431B /* RNScratchImageViewManager.m */; };
+		59AFD4301FFD702B004B431B /* MDMatrix.m in Sources */ = {isa = PBXBuildFile; fileRef = 5985C87F1FFD4A82002D162A /* MDMatrix.m */; };
+		59AFD4311FFD702F004B431B /* MDScratchImageView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5985C8811FFD4A82002D162A /* MDScratchImageView.mm */; };
+		59AFD4321FFD704E004B431B /* libRNScratchView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 134814201AA4EA6300B7C361 /* libRNScratchView.a */; };
 		B3E7B58A1CC2AC0600A0062D /* RNScratchView.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* RNScratchView.m */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +43,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				59AFD4321FFD704E004B431B /* libRNScratchView.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,7 +137,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				59AFD4311FFD702F004B431B /* MDScratchImageView.mm in Sources */,
 				B3E7B58A1CC2AC0600A0062D /* RNScratchView.m in Sources */,
+				59AFD4301FFD702B004B431B /* MDMatrix.m in Sources */,
 				59AFD4021FFD562B004B431B /* RNScratchImageViewManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -232,7 +238,10 @@
 					"$(SRCROOT)/../../react-native/React/**",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_NAME = RNScratchView;
 				SKIP_INSTALL = YES;
 			};
@@ -248,7 +257,10 @@
 					"$(SRCROOT)/../../react-native/React/**",
 				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+				);
 				PRODUCT_NAME = RNScratchView;
 				SKIP_INSTALL = YES;
 			};
