@@ -15,7 +15,7 @@ RCT_EXPORT_MODULE()
 - (UIView *)view
 {
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
-    scrollView.contentInset = UIEdgeInsetsMake([[UIApplication sharedApplication] statusBarFrame].size.height, 0.0f, 0.0f, 0.0f;
+    scrollView.contentInset = UIEdgeInsetsMake([[UIApplication sharedApplication] statusBarFrame].size.height, 0.0f, 0.0f, 0.0f);
     scrollView.canCancelContentTouches = NO;
     scrollView.delaysContentTouches = NO;
     [self.view addSubview:scrollView];
