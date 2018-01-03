@@ -23,7 +23,6 @@ import android.view.MotionEvent;
 import com.reactlibrary.utils.BitmapUtils;
 import com.reactlibrary.R;
 
-@SuppressLint("AppCompatCustomView")
 public class ScratchImageView extends ImageView {
 
     public interface IRevealListener {
@@ -35,6 +34,7 @@ public class ScratchImageView extends ImageView {
 
     private float mX, mY;
     private static final float TOUCH_TOLERANCE = 4;
+
 
     /**
      * Bitmap holding the scratch region.
@@ -120,8 +120,6 @@ public class ScratchImageView extends ImageView {
      * Initialises the paint drawing elements.
      */
     private void init() {
-
-
         mTouchPath = new Path();
 
         mErasePaint = new Paint();
@@ -247,7 +245,6 @@ public class ScratchImageView extends ImageView {
     }
 
     private void touch_up() {
-
         drawPath();
     }
 
@@ -279,16 +276,13 @@ public class ScratchImageView extends ImageView {
         return mErasePaint.getColor();
     }
 
-
     public Paint getErasePaint() {
         return mErasePaint;
     }
 
     public void setEraserMode() {
-
         getErasePaint().setXfermode(new PorterDuffXfermode(
                 PorterDuff.Mode.CLEAR));
-
     }
 
     public void setRevealListener(IRevealListener listener) {
@@ -398,7 +392,6 @@ public class ScratchImageView extends ImageView {
             width = vwidth;
         }
 
-
         ScaleType scaleType = getScaleType();
 
         switch (scaleType) {
@@ -422,7 +415,6 @@ public class ScratchImageView extends ImageView {
                 break;
 
         }
-
         return new int[] {left, top, left + width, top + height};
     }
 }

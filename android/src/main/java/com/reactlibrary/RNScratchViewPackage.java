@@ -23,7 +23,8 @@ public class RNScratchViewPackage implements ReactPackage {
 
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
-        return Arrays.<ViewManager>asList(new RNScratchViewManager(reactContext));
+        return Arrays.<ViewManager>asList(
+                new RNScratchImageViewManager());
     }
 }
 

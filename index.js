@@ -1,6 +1,3 @@
+var ScratchImageView = require('./src/ScratchImageView');
 
-import { NativeModules } from 'react-native';
-
-const { RNScratchView } = NativeModules;
-
-export default RNScratchView;
+module.exports = ScratchImageView;

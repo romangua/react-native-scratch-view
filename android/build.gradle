@@ -32,5 +32,6 @@ repositories {
 
 dependencies {
     compile 'com.facebook.react:react-native:+'
+    compile 'com.github.cooltechworks:ScratchView:v1.1'
 }
   

@@ -12,7 +12,7 @@ public class RNScratchViewContextModule extends ReactContextBaseJavaModule {
 
     @Override
     public String getName() {
-        return "RNScratchImageViewContext";
+        return "RNScratchViewContextModule";
     }
 
     public Activity getActivity() {

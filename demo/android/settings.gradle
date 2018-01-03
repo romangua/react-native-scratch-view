@@ -1,5 +1,0 @@
-rootProject.name = 'demo'
-include ':react-native-scratch-view'
-project(':react-native-scratch-view').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-scratch-view/android')
-
-include ':app'
