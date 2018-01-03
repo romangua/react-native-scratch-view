@@ -14,10 +14,6 @@ RCT_EXPORT_MODULE()
 
 - (UIView *)view
 {
-    GIDSignInButton *button = [[GIDSignInButton alloc] init];
-    button.colorScheme = kGIDSignInButtonColorSchemeLight;
-    button.style = kGIDSignInButtonStyleStandard;
-    
     UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
     scrollView.contentInset = UIEdgeInsetsMake([[UIApplication sharedApplication] statusBarFrame].size.height, 0.0f, 0.0f, 0.0f;
     scrollView.canCancelContentTouches = NO;
