@@ -2,8 +2,8 @@
 #import "RNScratchImageViewManagerController.h"
 #import "MDScratchImageView.h"
 
-@interface RNScratchImageViewManager : RCTViewManager
-@end
+//@interface RNScratchImageViewManager : RCTViewManager
+//@end
 
 @interface RNScratchImageViewManagerController () <MDScratchImageViewDelegate>
 @end

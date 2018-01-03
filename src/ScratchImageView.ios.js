@@ -4,18 +4,18 @@ import { NativeModules, requireNativeComponent, View, Text } from 'react-native'
 class ScratchImageView extends Component {
     constructor(props) {
         super(props);
-        this._onChange = this._onChange.bind(this);
+        //this._onChange = this._onChange.bind(this);
     }
 
-    _onChange(event) {
+  /*  _onChange(event) {
         /*if(!this.props.onDateChange) {
             return;
         }
         this.props.onDateChange(event.nativeEvent); */
-    }
+    }*/
 
     render() {
-        return <RNScratchImageView {...this.props} onChange={this._onChange} />;
+        return <RNScratchImageView {...this.props}/>;
     }
 }
 
@@ -27,8 +27,4 @@ ScratchImageView.propTypes = {
     ...View.propTypes,
 }
 
-const RNScratchImageView = requireNativeComponent(`RNScratchImageView`, ScratchImageView, {
-    nativeOnly: {
-        onChange: true,
-    }
-});
+const RNScratchImageView = requireNativeComponent(`RNScratchImageView`, ScratchImageView);
