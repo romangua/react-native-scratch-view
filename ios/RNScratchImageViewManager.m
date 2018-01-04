@@ -1,9 +1,9 @@
-#import <React/RCTViewManager.h>
 #import "RNScratchImageViewManagerController.h"
 #import "MDScratchImageView.h"
-
-@interface RNScratchImageViewManager : RCTViewManager
-@end
+#import "RNScratchImageViewManager.h"
+#import <React/RCTBridgeModule.h>
+#import <React/RCTBridge.h>
+#import <React/RCTEventDispatcher.h>
 
 @interface RNScratchImageViewManagerController () <MDScratchImageViewDelegate>
 @end
