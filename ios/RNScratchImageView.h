@@ -1,4 +1,4 @@
-#import <React/RCTComponent.h>
+#import <React/RCTView.h>
 
 @interface RNScratchImageView : RCTView
 

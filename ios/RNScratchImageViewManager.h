@@ -1,5 +1,5 @@
 #import <React/RCTViewManager.h>
 
-@interface RNScratchImageViewManager : RCTViewManager <MDScratchImageViewDelegate>
+@interface RNScratchImageViewManager : RCTViewManager
 
 @end
