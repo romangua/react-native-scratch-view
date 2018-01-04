@@ -12,9 +12,8 @@ RCT_EXPORT_MODULE()
 
 - (UIView *)view
 {
-    UIImage *image = [UIImage imageNamed:@"paint01-01.png"];
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-    UIImage *bluredImage = [UIImage imageNamed:@"paint01-01blur.png"];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"paint01-01"]];
+    UIImage *bluredImage = [UIImage imageNamed:@"paint01-01blur"];
     
     MDScratchImageView *scratchImageView = [[MDScratchImageView alloc] initWithFrame:imageView.frame];
     scratchImageView.delegate = self;
@@ -23,7 +22,7 @@ RCT_EXPORT_MODULE()
     [self.view addSubview:imageView];
     [self.view addSubview:scratchImageView];
     
-    return self;
+    return self.view;
 }
 
 #pragma mark - MDScratchImageViewDelegate
