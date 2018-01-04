@@ -5,26 +5,25 @@
 #import <React/RCTBridge.h>
 #import <React/RCTEventDispatcher.h>
 
-/*@interface RNScratchImageViewManagerController () <MDScratchImageViewDelegate>
- @end
- */
+
 @implementation RNScratchImageViewManager
 
 RCT_EXPORT_MODULE()
 
 - (UIView *)view
 {
-    UIImage *image = [UIImage imageNamed:@"scratched_image.png"];
+    UIImage *image = [UIImage imageNamed:@"paint01-01.png"];
     UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-    UIImage *bluredImage = [UIImage imageNamed:@"scratch_pattern.png"];
+    UIImage *bluredImage = [UIImage imageNamed:@"paint01-01blur.png"];
     
     MDScratchImageView *scratchImageView = [[MDScratchImageView alloc] initWithFrame:imageView.frame];
     scratchImageView.delegate = self;
     scratchImageView.image = bluredImage;
     
+    [self.view addSubview:imageView];
     [self.view addSubview:scratchImageView];
     
-    return scratchImageView;
+    return self;
 }
 
 #pragma mark - MDScratchImageViewDelegate

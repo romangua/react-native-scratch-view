@@ -42,6 +42,8 @@
 		59AFD43C1FFE7C93004B431B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		59AFD43F1FFE80C2004B431B /* scratch_pattern.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scratch_pattern.png; sourceTree = "<group>"; };
 		59AFD4401FFE80C2004B431B /* scratched_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scratched_image.png; sourceTree = "<group>"; };
+		59AFD4411FFE8390004B431B /* paint01-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "paint01-01.png"; sourceTree = "<group>"; };
+		59AFD4421FFE8390004B431B /* paint01-01blur.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "paint01-01blur.png"; sourceTree = "<group>"; };
 		B3E7B5881CC2AC0600A0062D /* RNScratchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNScratchView.h; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* RNScratchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNScratchView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -108,6 +110,8 @@
 			isa = PBXGroup;
 			children = (
 				59AFD43F1FFE80C2004B431B /* scratch_pattern.png */,
+				59AFD4411FFE8390004B431B /* paint01-01.png */,
+				59AFD4421FFE8390004B431B /* paint01-01blur.png */,
 				59AFD4401FFE80C2004B431B /* scratched_image.png */,
 			);
 			name = Resources;
