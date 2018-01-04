@@ -52,15 +52,19 @@ RCT_EXPORT_MODULE()
     
     UIImage *image = [UIImage imageNamed:@"scratched_image"];
     UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-    
     UIImage *bluredImage = [UIImage imageNamed:@"scratch_pattern"];
-    //UIImageView *scratchImageView = [[UIImageView alloc] initWithImage:bluredImage];
     
     MDScratchImageView *scratchImageView = [[MDScratchImageView alloc] init];
     scratchImageView.delegate = self;
     scratchImageView.image = bluredImage;
     
     return scratchImageView;
+}
+
+#pragma mark - MDScratchImageViewDelegate
+
+- (void)mdScratchImageView:(MDScratchImageView *)scratchImageView didChangeMaskingProgress:(CGFloat)maskingProgress {
+    NSLog(@"%s %p progress == %.2f", __PRETTY_FUNCTION__, scratchImageView, maskingProgress);
 }
 
 @end
