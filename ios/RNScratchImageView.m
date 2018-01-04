@@ -1,7 +1,5 @@
-#import <React/RCTComponent.h>
-
-@interface RNScratchImageView : RCTView 
-@end
+#import "RNScratchImageView.h"
+#import "MDScratchImageView.h"
 
 @implementation RNScratchImageView {
     MDScratchImageView *_scratchImageView;

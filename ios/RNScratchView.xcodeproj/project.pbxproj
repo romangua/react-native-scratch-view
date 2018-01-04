@@ -41,6 +41,8 @@
 		59AFD4431FFE9E0A004B431B /* scratch_pattern.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scratch_pattern.png; sourceTree = "<group>"; };
 		59AFD4441FFE9E0A004B431B /* scratched_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scratched_image.png; sourceTree = "<group>"; };
 		59AFD4911FFEAE96004B431B /* RNScratchImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNScratchImageView.m; sourceTree = "<group>"; };
+		59AFD4941FFEB561004B431B /* RNScratchImageViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNScratchImageViewManager.h; sourceTree = "<group>"; };
+		59AFD4951FFEB61C004B431B /* RNScratchImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNScratchImageView.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,7 +74,9 @@
 				59AFD4441FFE9E0A004B431B /* scratched_image.png */,
 				5985C87D1FFD4A82002D162A /* MDScratchImageView */,
 				59AFD4011FFD562B004B431B /* RNScratchImageViewManager.m */,
+				59AFD4941FFEB561004B431B /* RNScratchImageViewManager.h */,
 				59AFD4911FFEAE96004B431B /* RNScratchImageView.m */,
+				59AFD4951FFEB61C004B431B /* RNScratchImageView.h */,
 				134814211AA4EA7D00B7C361 /* Products */,
 				59AFD4371FFE7C6F004B431B /* Frameworks */,
 			);
