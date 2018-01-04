@@ -34,6 +34,8 @@
 		59AFD4011FFD562B004B431B /* RNScratchImageViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNScratchImageViewManager.m; sourceTree = "<group>"; };
 		59AFD4031FFD57CA004B431B /* RNScratchImageViewManagerController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNScratchImageViewManagerController.h; sourceTree = "<group>"; };
 		59AFD4331FFE5E8E004B431B /* RNScratchImageViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNScratchImageViewManager.h; sourceTree = "<group>"; };
+		59AFD4341FFE6ED5004B431B /* scratch_pattern.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scratch_pattern.png; sourceTree = "<group>"; };
+		59AFD4351FFE6ED6004B431B /* scratched_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scratched_image.png; sourceTree = "<group>"; };
 		B3E7B5881CC2AC0600A0062D /* RNScratchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNScratchView.h; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* RNScratchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNScratchView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -66,6 +68,8 @@
 				59AFD4031FFD57CA004B431B /* RNScratchImageViewManagerController.h */,
 				59AFD4331FFE5E8E004B431B /* RNScratchImageViewManager.h */,
 				59AFD4011FFD562B004B431B /* RNScratchImageViewManager.m */,
+				59AFD4341FFE6ED5004B431B /* scratch_pattern.png */,
+				59AFD4351FFE6ED6004B431B /* scratched_image.png */,
 				134814211AA4EA7D00B7C361 /* Products */,
 			);
 			sourceTree = "<group>";
