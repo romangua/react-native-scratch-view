@@ -16,3 +16,5 @@ ScratchImageView.propTypes = {
 }
 
 const RNScratchImageView = requireNativeComponent(`RNScratchImageView`, ScratchImageView);
+
+module.exports = ScratchImageView;
