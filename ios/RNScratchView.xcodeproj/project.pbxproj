@@ -37,10 +37,11 @@
 		59AFD4011FFD562B004B431B /* RNScratchImageViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNScratchImageViewManager.m; sourceTree = "<group>"; };
 		59AFD4031FFD57CA004B431B /* RNScratchImageViewManagerController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNScratchImageViewManagerController.h; sourceTree = "<group>"; };
 		59AFD4331FFE5E8E004B431B /* RNScratchImageViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNScratchImageViewManager.h; sourceTree = "<group>"; };
-		59AFD4361FFE70C3004B431B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		59AFD4381FFE7C6F004B431B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		59AFD43A1FFE7C77004B431B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		59AFD43C1FFE7C93004B431B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		59AFD43F1FFE80C2004B431B /* scratch_pattern.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scratch_pattern.png; sourceTree = "<group>"; };
+		59AFD4401FFE80C2004B431B /* scratched_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scratched_image.png; sourceTree = "<group>"; };
 		B3E7B5881CC2AC0600A0062D /* RNScratchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNScratchView.h; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* RNScratchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNScratchView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -70,13 +71,13 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
+				59AFD43E1FFE8046004B431B /* Resources */,
 				5985C87D1FFD4A82002D162A /* MDScratchImageView */,
 				B3E7B5881CC2AC0600A0062D /* RNScratchView.h */,
 				B3E7B5891CC2AC0600A0062D /* RNScratchView.m */,
 				59AFD4031FFD57CA004B431B /* RNScratchImageViewManagerController.h */,
 				59AFD4331FFE5E8E004B431B /* RNScratchImageViewManager.h */,
 				59AFD4011FFD562B004B431B /* RNScratchImageViewManager.m */,
-				59AFD4361FFE70C3004B431B /* Assets.xcassets */,
 				134814211AA4EA7D00B7C361 /* Products */,
 				59AFD4371FFE7C6F004B431B /* Frameworks */,
 			);
@@ -101,6 +102,15 @@
 				59AFD4381FFE7C6F004B431B /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		59AFD43E1FFE8046004B431B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				59AFD43F1FFE80C2004B431B /* scratch_pattern.png */,
+				59AFD4401FFE80C2004B431B /* scratched_image.png */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

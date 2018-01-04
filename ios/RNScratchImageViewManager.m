@@ -14,15 +14,17 @@ RCT_EXPORT_MODULE()
 
 - (UIView *)view
 {
-    UIImage *image = [UIImage imageNamed:@"scratched_image"];
+    UIImage *image = [UIImage imageNamed:@"scratched_image.png"];
     UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
-    UIImage *bluredImage = [UIImage imageNamed:@"scratch_pattern"];
+    UIImage *bluredImage = [UIImage imageNamed:@"scratch_pattern.png"];
     
-    MDScratchImageView *scratchImageView = [[MDScratchImageView alloc] init];
+    MDScratchImageView *scratchImageView = [[MDScratchImageView alloc] initWithFrame:imageView.frame];
     scratchImageView.delegate = self;
     scratchImageView.image = bluredImage;
     
-    return [self.view addSubview:scratchImageView];
+    [self.view addSubview:scratchImageView];
+    
+    return scratchImageView;
 }
 
 #pragma mark - MDScratchImageViewDelegate
