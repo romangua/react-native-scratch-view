@@ -27,7 +27,9 @@ android {
 }
 
 repositories {
-    mavenCentral()
+   // mavenCentral()
+    jcenter()
+    maven { url "https://jitpack.io" }
 }
 
 dependencies {
