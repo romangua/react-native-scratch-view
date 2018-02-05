@@ -38,8 +38,6 @@
 		59AFD4381FFE7C6F004B431B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		59AFD43A1FFE7C77004B431B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		59AFD43C1FFE7C93004B431B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		59AFD4431FFE9E0A004B431B /* scratch_pattern.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scratch_pattern.png; sourceTree = "<group>"; };
-		59AFD4441FFE9E0A004B431B /* scratched_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scratched_image.png; sourceTree = "<group>"; };
 		59AFD4911FFEAE96004B431B /* RNScratchImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNScratchImageView.m; sourceTree = "<group>"; };
 		59AFD4941FFEB561004B431B /* RNScratchImageViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNScratchImageViewManager.h; sourceTree = "<group>"; };
 		59AFD4951FFEB61C004B431B /* RNScratchImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RNScratchImageView.h; sourceTree = "<group>"; };
@@ -70,8 +68,6 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
-				59AFD4431FFE9E0A004B431B /* scratch_pattern.png */,
-				59AFD4441FFE9E0A004B431B /* scratched_image.png */,
 				5985C87D1FFD4A82002D162A /* MDScratchImageView */,
 				59AFD4011FFD562B004B431B /* RNScratchImageViewManager.m */,
 				59AFD4941FFEB561004B431B /* RNScratchImageViewManager.h */,
@@ -210,6 +206,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				"USER_HEADER_SEARCH_PATHS[arch=*]" = "";
 			};
 			name = Debug;
 		};
@@ -246,6 +243,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				USER_HEADER_SEARCH_PATHS = "";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

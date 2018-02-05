@@ -3,29 +3,24 @@ package com.reactlibrary;
 import android.graphics.Color;
 import android.support.annotation.Nullable;
 import android.util.Log;
-
 import com.cooltechworks.views.ScratchImageView;
-import com.facebook.infer.annotation.Assertions;
 import com.facebook.react.bridge.Arguments;
-import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.common.MapBuilder;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
-import com.facebook.react.uimanager.UIManagerModule;
-import com.facebook.react.uimanager.events.EventDispatcher;
+import com.facebook.react.uimanager.annotations.ReactProp;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
 
 import java.util.Map;
-
-import static java.security.AccessController.getContext;
 
 
 public class RNScratchImageViewManager extends SimpleViewManager<ScratchImageView> {
 
     public static final String REACT_CLASS = "RNScratchImageView";
-    public static final int ON_REVEAL = 1;
+    private static final String ON_REVEAL_PERCENT_CHANGED = "ON_REVEAL_PERCENT_CHANGED";
+    private static final String ON_REVEALED = "ON_REVEALED";
 
     @Override
     public String getName() {
@@ -41,29 +36,55 @@ public class RNScratchImageViewManager extends SimpleViewManager<ScratchImageVie
         return scratchImageView;
     }
 
+    @ReactProp(name = "strokeWidth")
+    public void setStrokeWidth(ScratchImageView view, int value) {
+        view.setStrokeWidth(value);
+    }
+
+    @ReactProp(name = "src")
+    public void setHeight(ScratchImageView view, int value) {
+        view.setMinimumHeight(value);
+        view.setMaxHeight(value);
+    }
+
+   public Map getExportedCustomBubblingEventTypeConstants() {
+        return MapBuilder.builder()
+                .put(ON_REVEAL_PERCENT_CHANGED, MapBuilder.of("phasedRegistrationNames", MapBuilder.of("bubbled", "onRevealPercentChanged")))
+                .put(ON_REVEALED, MapBuilder.of("phasedRegistrationNames", MapBuilder.of("bubbled", "onRevealed")))
+                .build();
+    }
+
     @Override
     protected void addEventEmitters(final ThemedReactContext reactContext, final ScratchImageView view) {
 
         view.setRevealListener(new ScratchImageView.IRevealListener() {
             @Override
             public void onRevealed(com.cooltechworks.views.ScratchImageView scratchImageView) {
-                Log.d("llog", "OnReveal fired ");
+                Log.d("llog", "OnReveald fired ");
             }
 
             @Override
             public void onRevealPercentChangedListener(com.cooltechworks.views.ScratchImageView scratchImageView, float value) {
                 // Value between 0-1
-                Log.d("llog", "onRevealPercentChanged fired: " + value*100 + "%");
-                if(reactContext!=null){
-                    Log.d("llog", "entrooo fired: " + value*100 + "%");
-                    WritableMap event = Arguments.createMap();
+                Log.d("llog", "onRevealPercentChanged fired: " + value * 100 + "%");
+                if (reactContext != null) {
+                    if (value * 100 >= 95f) {
+                        WritableMap event = Arguments.createMap();
+                        reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(
+                                view.getId(),
+                                ON_REVEALED,
+                                event);
+                    } else {
 
-                    event.putDouble("percent", value*100);
-                    reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(
-                            view.getId(),
-                            "onRevealPercentChanged",
-                            event);
+                        WritableMap event = Arguments.createMap();
+                        event.putDouble("value", value * 100);
+                        reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(
+                                view.getId(),
+                                ON_REVEAL_PERCENT_CHANGED,
+                                event);
+                    }
                 }
+
             }
         });
     }

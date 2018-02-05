@@ -7,9 +7,23 @@
 
 RCT_EXPORT_MODULE()
 
+RCT_EXPORT_VIEW_PROPERTY(strokeWidth, NSNumber*)
+RCT_EXPORT_VIEW_PROPERTY(imageScratched, NSDictionary*)
+RCT_EXPORT_VIEW_PROPERTY(imagePattern, NSDictionary*)
+
+
+RCT_EXPORT_VIEW_PROPERTY(onRevealPercentChanged, RCTBubblingEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onRevealed, RCTBubblingEventBlock)
+
 - (UIView *)view
 {
     return [[RNScratchImageView alloc] init];
 }
+
+- (dispatch_queue_t)methodQueue
+{
+    return dispatch_get_main_queue();
+}
+
 
 @end
