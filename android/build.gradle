@@ -35,5 +35,6 @@ repositories {
 dependencies {
     compile 'com.facebook.react:react-native:+'
     compile 'com.github.cooltechworks:ScratchView:v1.1'
+    compile 'com.squareup.picasso:picasso:2.5.2'
 }
   
