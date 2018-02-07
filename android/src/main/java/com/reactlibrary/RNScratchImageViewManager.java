@@ -5,6 +5,8 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
+import android.view.View;
+
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
@@ -24,6 +26,7 @@ public class RNScratchImageViewManager extends SimpleViewManager<ScratchImageVie
     private static final String ON_REVEAL_PERCENT_CHANGED = "ON_REVEAL_PERCENT_CHANGED";
     private static final String ON_REVEALED = "ON_REVEALED";
     private Context _context;
+    private String imageScratched_uri;
 
     @Override
     public String getName() {
@@ -46,11 +49,8 @@ public class RNScratchImageViewManager extends SimpleViewManager<ScratchImageVie
 
     @ReactProp(name = "imageScratched")
     public void setImageScratched(final ScratchImageView view, final ReadableMap value) {
-        Log.d("entro", "setImageScratched: " +value.getString("uri"));
-        Picasso.with(_context)
-                .load(value.getString("uri"))
-                .fit()
-                .into(view);
+        //Log.d("entro", "setImageScratched: " +value.getString("uri"));
+        imageScratched_uri = value.getString("uri");
     }
 
     @ReactProp(name = "imagePattern")
@@ -61,20 +61,26 @@ public class RNScratchImageViewManager extends SimpleViewManager<ScratchImageVie
                     @Override
                     public void onBitmapLoaded (Bitmap bitmap, Picasso.LoadedFrom from){
                         Log.d("entro", "onBitmapLoaded: " + value.getString("uri"));
-                        if(view != null && bitmap != null) {
-                            Log.d("entro","no es null");
-                            view.setScratchPattern(bitmap);
-                        }
+                        view.setScratchPattern(bitmap);
+
+                        // Obtenemos la imagen de fondo despues de la imagen pattern
+                        Picasso.with(_context)
+                                .load(imageScratched_uri)
+                                .fit()
+                                .into(view);
+
+                        view.setVisibility(View.VISIBLE);
                     }
 
                     @Override
                     public void onBitmapFailed(Drawable errorDrawable) {
-                        Log.d("entro", "onBitmapFailed");
+                        //Log.d("entro", "onBitmapFailed");
                     }
 
                     @Override
                     public void onPrepareLoad(Drawable placeHolderDrawable) {
-                        Log.d("entro", "onPrepareLoad");
+                       // Log.d("entro", "onPrepareLoad");
+                        view.setVisibility(View.INVISIBLE);
                     }
                 });
     }
@@ -92,7 +98,7 @@ public class RNScratchImageViewManager extends SimpleViewManager<ScratchImageVie
         view.setRevealListener(new ScratchImageView.IRevealListener() {
             @Override
             public void onRevealed(ScratchImageView scratchImageView) {
-                Log.d("llog", "OnReveald fired ");
+                //Log.d("llog", "OnReveald fired ");
             }
 
             @Override
@@ -105,7 +111,7 @@ public class RNScratchImageViewManager extends SimpleViewManager<ScratchImageVie
                                 ON_REVEALED,
                                 event);
                     } else {
-                        Log.d("llog", "onRevealPercentChanged fired: " + value * 100 + "%");
+                       // Log.d("llog", "onRevealPercentChanged fired: " + value * 100 + "%");
 
                         WritableMap event = Arguments.createMap();
                         event.putDouble("value", value * 100);

@@ -168,7 +168,7 @@ public class ScratchImageView extends ImageView {
         this.oldw = oldw;
         this.oldh = oldh;
 
-        if(mDrawable != null) {
+        if(mDrawable != null && w > 0 && h > 0) {
             mScratchBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
             mCanvas = new Canvas(mScratchBitmap);
 
@@ -186,11 +186,18 @@ public class ScratchImageView extends ImageView {
     }
 
     @Override
+    public void setBackgroundResource(int resid) {
+        super.setBackgroundResource(resid);
+        Log.d("entro", "setBackgroundResource");
+    }
+
+
+    @Override
     protected void onDraw(Canvas canvas) {
         Log.d("entro","onDraw");
         super.onDraw(canvas);
 
-        if(mDrawable != null) {
+        if(mDrawable != null && w > 0 && h > 0) {
             canvas.drawBitmap(mScratchBitmap, 0, 0, mBitmapPaint);
             canvas.drawPath(mErasePath, mErasePaint);
         }
@@ -277,26 +284,30 @@ public class ScratchImageView extends ImageView {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         Log.d("entro","onTouchEvent");
-        float x = event.getX();
-        float y = event.getY();
+        try  {
+            float x = event.getX();
+            float y = event.getY();
 
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                touch_start(x, y);
-                invalidate();
-                break;
-            case MotionEvent.ACTION_MOVE:
-                touch_move(x, y);
-                invalidate();
-                break;
-            case MotionEvent.ACTION_UP:
-                touch_up();
-                invalidate();
-                break;
-            default:
-                break;
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
+                    touch_start(x, y);
+                    invalidate();
+                    break;
+                case MotionEvent.ACTION_MOVE:
+                    touch_move(x, y);
+                    invalidate();
+                    break;
+                case MotionEvent.ACTION_UP:
+                    touch_up();
+                    invalidate();
+                    break;
+                default:
+                    break;
+            }
+            return true;
         }
-        return true;
+        catch (Exception e) {}
+        return false;
     }
 
     public int getColor() {
