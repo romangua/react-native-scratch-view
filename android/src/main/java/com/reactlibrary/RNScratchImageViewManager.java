@@ -1,12 +1,11 @@
 package com.reactlibrary;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.support.annotation.Nullable;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
-import com.cooltechworks.views.ScratchImageView;
 import com.facebook.react.bridge.Arguments;
-import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.common.MapBuilder;
@@ -14,10 +13,10 @@ import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.annotations.ReactProp;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
+import com.reactlibrary.lib.ScratchImageView;
 import com.squareup.picasso.Picasso;
-
+import com.squareup.picasso.Target;
 import java.util.Map;
-
 
 public class RNScratchImageViewManager extends SimpleViewManager<ScratchImageView> {
 
@@ -36,30 +35,48 @@ public class RNScratchImageViewManager extends SimpleViewManager<ScratchImageVie
         this._context = context;
         ScratchImageView scratchImageView = new ScratchImageView(_context);
         scratchImageView.setBackgroundColor(Color.WHITE);
-        scratchImageView.setImageResource(R.drawable.homer);
 
         return scratchImageView;
     }
 
     @ReactProp(name = "strokeWidth")
-    public void setStrokeWidth(ScratchImageView view, int value) {
-        view.setStrokeWidth(value);
+    public void setStrokeWidth(final ScratchImageView view, int value) {
+        view.setStrokeWidth(value/2);
     }
 
     @ReactProp(name = "imageScratched")
-    public void setImageScratched(ScratchImageView view, ReadableMap value) {
-
+    public void setImageScratched(final ScratchImageView view, final ReadableMap value) {
+        Log.d("entro", "setImageScratched: " +value.getString("uri"));
         Picasso.with(_context)
-                .load("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1GzFEIXWOydx7khmtlP2_L-geboBoduazwhqO0h2eL856Pdd9")
-               // .resize(50, 50)
-                .centerCrop()
+                .load(value.getString("uri"))
+                .fit()
                 .into(view);
     }
 
     @ReactProp(name = "imagePattern")
-    public void setImagePattern(ScratchImageView view, ReadableMap value) {
-        // view.setMinimumHeight(value);
-        // view.setMaxHeight(value);
+    public void setImagePattern(final ScratchImageView view, final ReadableMap value) {
+        Picasso.with(_context)
+                .load(value.getString("uri"))
+                .into(new Target() {
+                    @Override
+                    public void onBitmapLoaded (Bitmap bitmap, Picasso.LoadedFrom from){
+                        Log.d("entro", "onBitmapLoaded: " + value.getString("uri"));
+                        if(view != null && bitmap != null) {
+                            Log.d("entro","no es null");
+                            view.setScratchPattern(bitmap);
+                        }
+                    }
+
+                    @Override
+                    public void onBitmapFailed(Drawable errorDrawable) {
+                        Log.d("entro", "onBitmapFailed");
+                    }
+
+                    @Override
+                    public void onPrepareLoad(Drawable placeHolderDrawable) {
+                        Log.d("entro", "onPrepareLoad");
+                    }
+                });
     }
 
    public Map getExportedCustomBubblingEventTypeConstants() {
@@ -74,14 +91,12 @@ public class RNScratchImageViewManager extends SimpleViewManager<ScratchImageVie
 
         view.setRevealListener(new ScratchImageView.IRevealListener() {
             @Override
-            public void onRevealed(com.cooltechworks.views.ScratchImageView scratchImageView) {
+            public void onRevealed(ScratchImageView scratchImageView) {
                 Log.d("llog", "OnReveald fired ");
             }
 
             @Override
-            public void onRevealPercentChangedListener(com.cooltechworks.views.ScratchImageView scratchImageView, float value) {
-                // Value between 0-1
-                Log.d("llog", "onRevealPercentChanged fired: " + value * 100 + "%");
+            public void onRevealPercentChangedListener(ScratchImageView scratchImageView, float value) {
                 if (reactContext != null) {
                     if (value * 100 >= 95f) {
                         WritableMap event = Arguments.createMap();
@@ -90,6 +105,7 @@ public class RNScratchImageViewManager extends SimpleViewManager<ScratchImageVie
                                 ON_REVEALED,
                                 event);
                     } else {
+                        Log.d("llog", "onRevealPercentChanged fired: " + value * 100 + "%");
 
                         WritableMap event = Arguments.createMap();
                         event.putDouble("value", value * 100);
@@ -99,7 +115,6 @@ public class RNScratchImageViewManager extends SimpleViewManager<ScratchImageVie
                                 event);
                     }
                 }
-
             }
         });
     }
