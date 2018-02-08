@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.ReadableMap;
@@ -38,6 +39,7 @@ public class RNScratchImageViewManager extends SimpleViewManager<ScratchImageVie
         this._context = context;
         ScratchImageView scratchImageView = new ScratchImageView(_context);
         scratchImageView.setBackgroundColor(Color.WHITE);
+        //scratchImageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
 
         return scratchImageView;
     }
@@ -104,7 +106,7 @@ public class RNScratchImageViewManager extends SimpleViewManager<ScratchImageVie
             @Override
             public void onRevealPercentChangedListener(ScratchImageView scratchImageView, float value) {
                 if (reactContext != null) {
-                    if (value * 100 >= 95f) {
+                    if (value * 100 >= 99f) {
                         WritableMap event = Arguments.createMap();
                         reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(
                                 view.getId(),

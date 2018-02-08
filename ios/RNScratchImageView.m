@@ -2,11 +2,14 @@
 #import "MDScratchImageView.h"
 #import <React/RCTBridgeModule.h>
 #import <React/RCTEventDispatcher.h>
+#import "UIView+React.h"
 
 @interface RNScratchImageView () <MDScratchImageViewDelegate>
 
 @property (nonatomic, copy) RCTBubblingEventBlock onRevealPercentChanged;
 @property (nonatomic, copy) RCTBubblingEventBlock onRevealed;
+@property (nonatomic) CGSize viewSize;
+
 
 - (instancetype)initWithEventDispatcher:(RCTEventDispatcher *)eventDispatcher;
 
@@ -35,14 +38,23 @@
     return self;
 }
 
+- (void)reactSetFrame:(CGRect)frame
+{
+    [super reactSetFrame: frame];
+    _viewSize = frame.size;
+    [self reloadView];
+}
+
 -(void)reloadView {
     NSURL *urlScratched = [NSURL URLWithString:_imageScratchedName];
     NSData *dataScratched = [NSData dataWithContentsOfURL:urlScratched];
-    _imageScratched = [[UIImageView alloc] initWithImage:[UIImage imageWithData:dataScratched]];
+    UIImage *imageResize = [self scaleImage:[UIImage imageWithData:dataScratched] toSize:_viewSize];
+    
+    _imageScratched = [[UIImageView alloc] initWithImage:imageResize];
     
     NSURL *urlPattern = [NSURL URLWithString:_imagePatternName];
     NSData *dataPattern = [NSData dataWithContentsOfURL:urlPattern];
-    _imagePattern = [UIImage imageWithData:dataPattern];
+    _imagePattern = [self scaleImage:[UIImage imageWithData:dataPattern] toSize:_viewSize];
     
     _scratchImageView = [[MDScratchImageView alloc] initWithFrame:_imageScratched.frame];
     _scratchImageView.delegate = self;
@@ -56,31 +68,49 @@
 
 - (void)setStrokeWidth:(NSNumber*)strokeWidth {
     _strokeWidth = strokeWidth;
-    
-    [self reloadView];
 }
 
 - (void)setImageScratched:(NSDictionary*)imageScratched {
     _imageScratchedName = imageScratched[@"uri"];
-    
-    [self reloadView];
 }
 
 - (void)setImagePattern:(NSDictionary*)imagePattern {
     _imagePatternName = imagePattern[@"uri"];
-    
-    [self reloadView];
 }
 
 #pragma mark - MDScratchImageViewDelegate
 
 - (void)mdScratchImageView:(MDScratchImageView *)scratchImageView didChangeMaskingProgress:(CGFloat)maskingProgress{
-    if (maskingProgress >= 0.95) {
+    if (maskingProgress >= 0.99) {
         self.onRevealed(@{});
         return;
     }
     
     self.onRevealPercentChanged(@{@"value": @(maskingProgress*100)});
+}
+
+- (UIImage *)scaleImage:(UIImage *)originalImage toSize:(CGSize)size
+{
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    CGContextRef context = CGBitmapContextCreate(NULL, size.width, size.height, 8, 0, colorSpace, kCGImageAlphaPremultipliedLast);
+    CGContextClearRect(context, CGRectMake(0, 0, size.width, size.height));
+    
+    if (originalImage.imageOrientation == UIImageOrientationRight) {
+        CGContextRotateCTM(context, -M_PI_2);
+        CGContextTranslateCTM(context, -size.height, 0.0f);
+        CGContextDrawImage(context, CGRectMake(0, 0, size.height, size.width), originalImage.CGImage);
+    } else {
+        CGContextDrawImage(context, CGRectMake(0, 0, size.width, size.height), originalImage.CGImage);
+    }
+    
+    CGImageRef scaledImage = CGBitmapContextCreateImage(context);
+    CGColorSpaceRelease(colorSpace);
+    CGContextRelease(context);
+    
+    UIImage *image = [UIImage imageWithCGImage:scaledImage];
+    CGImageRelease(scaledImage);
+    
+    return image;
 }
 
 @end
