@@ -10,6 +10,7 @@ RCT_EXPORT_MODULE()
 RCT_EXPORT_VIEW_PROPERTY(strokeWidth, NSNumber*)
 RCT_EXPORT_VIEW_PROPERTY(imageScratched, NSDictionary*)
 RCT_EXPORT_VIEW_PROPERTY(imagePattern, NSDictionary*)
+RCT_EXPORT_VIEW_PROPERTY(revealPercent, NSNumber*)
 
 RCT_EXPORT_VIEW_PROPERTY(onRevealPercentChanged, RCTBubblingEventBlock)
 RCT_EXPORT_VIEW_PROPERTY(onRevealed, RCTBubblingEventBlock)

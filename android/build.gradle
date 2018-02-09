@@ -2,6 +2,10 @@
 buildscript {
     repositories {
         jcenter()
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
     }
 
     dependencies {
@@ -27,11 +31,14 @@ android {
 }
 
 repositories {
-   mavenCentral()
+    mavenCentral()
+    maven {
+        url 'https://maven.google.com/'
+        name 'Google'
+    }
 }
 
 dependencies {
     compile 'com.facebook.react:react-native:+'
-    compile 'com.squareup.picasso:picasso:2.5.2'
 }
   

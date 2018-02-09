@@ -1,4 +1,4 @@
-
+ 
 # react-native-scratch-view
 
 ## Getting started
@@ -34,20 +34,62 @@
       compile project(':react-native-scratch-view')
   	```
 
-#### Windows
-[Read it! :D](https://github.com/ReactWindows/react-native)
-
-1. In Visual Studio add the `RNScratchView.sln` in `node_modules/react-native-scratch-view/windows/RNScratchView.sln` folder to their solution, reference from their app.
-2. Open up your `MainPage.cs` app
-  - Add `using Scratch.View.RNScratchView;` to the usings at the top of the file
-  - Add `new RNScratchViewPackage()` to the `List<IReactPackage>` returned by the `Packages` method
-
 
 ## Usage
 ```javascript
-import RNScratchView from 'react-native-scratch-view';
 
-// TODO: What to do with the module?
-RNScratchView;
+import React, { Component } from 'react';
+import { View, Text, StyleSheet} from 'react-native';
+import ScratchImageView from 'react-native-scratch-view';
+
+export default class App extends Component {
+
+	constructor(props) {
+		super(props);
+
+		this.state = {
+		onRevealPercentChanged: 0,
+		onRevealed: "false"
+		};
+		this.onRevealPercentChanged = this.onRevealPercentChanged.bind(this);
+		this.onRevealed = this.onRevealed.bind(this);
+	}
+
+	onRevealed() {
+		this.setState({onRevealed: "true"});
+	}
+
+	onRevealPercentChanged(e) {
+		this.setState({onRevealPercentChanged: e});
+	}
+
+	render() {
+		return (
+			<View style={styles.container}>
+				<ScratchImageView 
+					style={{height: 350, width: 350}}
+					onRevealPercentChanged={this.onRevealPercentChanged}
+					onRevealed={this.onRevealed}
+					strokeWidth={20}
+					revealPercent={50}
+					imageScratched={{uri: 'https://static.iris.net.co/semana/upload/images/2016/6/2/476094_1.jpg'}}
+					imagePattern={{uri: 'https://s3-media3.fl.yelpcdn.com/bphoto/Meh1qnJ-w95iitwbIF7moA/348s.jpg'}}
+				/>
+
+				<Text>onRevealPercentChanged: {this.state.onRevealPercentChanged} %</Text>
+				<Text>onRevealed: {this.state.onRevealed}</Text>
+			</View>
+		);
+	}
+}
+
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center'
+	}
+});
+
 ```
   

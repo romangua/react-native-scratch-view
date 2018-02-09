@@ -35,6 +35,7 @@ class ScratchImageView extends Component {
 }
 
 ScratchImageView.propTypes = {
+    revealPercent: PropTypes.number,
     imageScratched: PropTypes.object,
     imagePattern: PropTypes.object,
     strokeWidth: PropTypes.number,

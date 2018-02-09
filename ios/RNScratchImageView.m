@@ -5,88 +5,93 @@
 #import "UIView+React.h"
 
 @interface RNScratchImageView () <MDScratchImageViewDelegate>
-
 @property (nonatomic, copy) RCTBubblingEventBlock onRevealPercentChanged;
 @property (nonatomic, copy) RCTBubblingEventBlock onRevealed;
-@property (nonatomic) CGSize viewSize;
-
-
-- (instancetype)initWithEventDispatcher:(RCTEventDispatcher *)eventDispatcher;
-
 @end
 
-@implementation RNScratchImageView {
-    RCTEventDispatcher *_eventDispatcher;
-    MDScratchImageView *_scratchImageView;
-    UIImageView *_imageScratched;
-    UIImage *_imagePattern;
-    
-    NSString *_imageScratchedName;
-    NSString *_imagePatternName;
-    NSNumber *_strokeWidth;
-}
+bool isImageScratchRevealed = false;
+CGSize viewSize;
+float revealPercentValue = 0.98f;
+bool isUserSetRevealPercentValue = false;
+int strokeWidthValue = 10;
+NSString *imageScratchedValue;
+NSString *imagePatternValue;
 
-- (instancetype)initWithEventDispatcher:(RCTEventDispatcher *)eventDispatcher
-{
-    if ((self = [super init])) {
-        _eventDispatcher = eventDispatcher;
-        
-        // Aca se pueden setear variables por defecto
-        _strokeWidth = @10;
-        
-    }
-    return self;
+UIImageView *_imageScratched;
+UIImage *_imagePattern;
+
+@implementation RNScratchImageView {
+    MDScratchImageView *_scratchImageView;
 }
 
 - (void)reactSetFrame:(CGRect)frame
 {
     [super reactSetFrame: frame];
-    _viewSize = frame.size;
+    viewSize = frame.size;
+    
     [self reloadView];
 }
 
 -(void)reloadView {
-    NSURL *urlScratched = [NSURL URLWithString:_imageScratchedName];
+    NSURL *urlScratched = [NSURL URLWithString:imageScratchedValue];
     NSData *dataScratched = [NSData dataWithContentsOfURL:urlScratched];
-    UIImage *imageResize = [self scaleImage:[UIImage imageWithData:dataScratched] toSize:_viewSize];
+    UIImage *imageResize = [self scaleImage:[UIImage imageWithData:dataScratched] toSize:viewSize];
     
     _imageScratched = [[UIImageView alloc] initWithImage:imageResize];
     
-    NSURL *urlPattern = [NSURL URLWithString:_imagePatternName];
+    NSURL *urlPattern = [NSURL URLWithString:imagePatternValue];
     NSData *dataPattern = [NSData dataWithContentsOfURL:urlPattern];
-    _imagePattern = [self scaleImage:[UIImage imageWithData:dataPattern] toSize:_viewSize];
+    _imagePattern = [self scaleImage:[UIImage imageWithData:dataPattern] toSize:viewSize];
     
     _scratchImageView = [[MDScratchImageView alloc] initWithFrame:_imageScratched.frame];
     _scratchImageView.delegate = self;
     
-    [_scratchImageView setImage:_imagePattern radius:[_strokeWidth intValue]];
+    [_scratchImageView setImage:_imagePattern radius:strokeWidthValue];
     _scratchImageView.image = _imagePattern;
     
     [self addSubview:_imageScratched];
     [self addSubview:_scratchImageView];
 }
 
+- (void)setRevealPercent:(NSNumber*)revealPercent {
+    revealPercentValue = [revealPercent floatValue] / 100;
+    isUserSetRevealPercentValue = true;
+}
+
 - (void)setStrokeWidth:(NSNumber*)strokeWidth {
-    _strokeWidth = strokeWidth;
+    strokeWidthValue = [strokeWidth intValue];
 }
 
 - (void)setImageScratched:(NSDictionary*)imageScratched {
-    _imageScratchedName = imageScratched[@"uri"];
+    imageScratchedValue = imageScratched[@"uri"];
 }
 
 - (void)setImagePattern:(NSDictionary*)imagePattern {
-    _imagePatternName = imagePattern[@"uri"];
+    imagePatternValue = imagePattern[@"uri"];
 }
 
 #pragma mark - MDScratchImageViewDelegate
 
 - (void)mdScratchImageView:(MDScratchImageView *)scratchImageView didChangeMaskingProgress:(CGFloat)maskingProgress{
-    if (maskingProgress >= 0.99) {
+    
+    if (maskingProgress >= revealPercentValue && !isImageScratchRevealed) {
+        isImageScratchRevealed = true;
         self.onRevealed(@{});
+        
+        NSString* res;
+        if(isUserSetRevealPercentValue)
+            res = [NSString stringWithFormat:@"%.02f", revealPercentValue*100];
+        else
+            res = [NSString stringWithFormat:@"%d", 100];
+        
+        self.onRevealPercentChanged(@{@"value": res});
         return;
     }
     
-    self.onRevealPercentChanged(@{@"value": @(maskingProgress*100)});
+    if (!isImageScratchRevealed) {
+        NSString* formattedNumber = [NSString stringWithFormat:@"%.02f", maskingProgress*100];
+        self.onRevealPercentChanged(@{@"value": (formattedNumber)});
+    }
 }
 
 - (UIImage *)scaleImage:(UIImage *)originalImage toSize:(CGSize)size
