@@ -44,51 +44,48 @@ import ScratchImageView from 'react-native-scratch-view';
 
 export default class App extends Component {
 
-	constructor(props) {
-		super(props);
+constructor(props) {
+   super(props);
 
-		this.state = {
-		onRevealPercentChanged: 0,
-		onRevealed: "false"
-		};
-		this.onRevealPercentChanged = this.onRevealPercentChanged.bind(this);
-		this.onRevealed = this.onRevealed.bind(this);
-	}
+   this.state = {
+     onRevealPercentChanged: 0,
+     onRevealed: "false"
+   };
+   this.onRevealPercentChanged = this.onRevealPercentChanged.bind(this);
+   this.onRevealed = this.onRevealed.bind(this);
+}
 
-	onRevealed() {
-		this.setState({onRevealed: "true"});
-	}
+onRevealed() {
+   this.setState({onRevealed: "true"});
+}
 
-	onRevealPercentChanged(e) {
-		this.setState({onRevealPercentChanged: e});
-	}
+onRevealPercentChanged(e) {
+   this.setState({onRevealPercentChanged: e});
+}
 
-	render() {
-		return (
-			<View style={styles.container}>
-				<ScratchImageView 
-					style={{height: 350, width: 350}}
-					onRevealPercentChanged={this.onRevealPercentChanged}
-					onRevealed={this.onRevealed}
-					strokeWidth={20}
-					revealPercent={50}
-					imageScratched={{uri: 'https://static.iris.net.co/semana/upload/images/2016/6/2/476094_1.jpg'}}
-					imagePattern={{uri: 'https://s3-media3.fl.yelpcdn.com/bphoto/Meh1qnJ-w95iitwbIF7moA/348s.jpg'}}
-				/>
-
-				<Text>onRevealPercentChanged: {this.state.onRevealPercentChanged} %</Text>
-				<Text>onRevealed: {this.state.onRevealed}</Text>
-			</View>
-		);
-	}
+render() {
+   return (
+     <View style={styles.container}>
+        <ScratchImageView 
+	  style={{height: 350, width: 350}}
+	  onRevealPercentChanged={this.onRevealPercentChanged}
+	  onRevealed={this.onRrevealPercent={50}
+	  imageScratched={{uri: 'https://static.iris.net.co/semana/upload/images/2016/6/2/476094_1.jpg'}}
+	  imagePattern={{uri: 'https://s3-media3.fl.yelpcdn.com/bphoto/Meh1qnJ-w95iitwbIF7moA/348s.jpg'}}
+	/>
+	<Text>onRevealPercentChanged: {this.state.onRevealPercentChanged} %</Text>		
+	<Text>onRevealed: {this.state.onRevealed}</Text>
+     </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center'
-	}
+   container: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center'
+   }
 });
 
 ```
