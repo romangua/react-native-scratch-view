@@ -70,6 +70,7 @@ render() {
 	  style={{height: 350, width: 350}}
 	  onRevealPercentChanged={this.onRevealPercentChanged}
 	  onRevealed={this.onRrevealPercent={50}
+	  strokeWidth={20}
 	  imageScratched={{uri: 'https://static.iris.net.co/semana/upload/images/2016/6/2/476094_1.jpg'}}
 	  imagePattern={{uri: 'https://s3-media3.fl.yelpcdn.com/bphoto/Meh1qnJ-w95iitwbIF7moA/348s.jpg'}}
 	/>
